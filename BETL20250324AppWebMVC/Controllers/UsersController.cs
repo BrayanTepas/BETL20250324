@@ -43,7 +43,13 @@ namespace BETL20250324AppWebMVC.Controllers
 
             return View(await query.ToListAsync());
         }
-
+        [AllowAnonymous]
+        public async Task<IActionResult> CerrarSession()
+        {
+            // Hola mundo
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
         [AllowAnonymous]
         public IActionResult Login()
         {
