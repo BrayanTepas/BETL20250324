@@ -6,6 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BETL20250324AppWebMVC.Models;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BETL20250324AppWebMVC.Controllers
 {
@@ -38,6 +44,41 @@ namespace BETL20250324AppWebMVC.Controllers
             return View(await query.ToListAsync());
         }
 
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Login(User usuario)
+        {
+            usuario.Password = CalcularHashMD5(usuario.Password);
+            var usuarioAuth = await _context.
+                Users.
+                FirstOrDefaultAsync(s => s.Email == usuario.Email && s.Password == usuario.Password);
+
+            if (usuarioAuth != null && usuarioAuth.Id > 0 && usuarioAuth.Email == usuario.Email)
+            {
+                var claims = new[] {
+            new Claim(ClaimTypes.Name, usuarioAuth.Email),
+            new Claim("Id", usuarioAuth.Id.ToString()),
+            new Claim("Username", usuarioAuth.Username),
+            new Claim(ClaimTypes.Role, usuarioAuth.Role)
+        };
+
+                var identidad = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identidad));
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "El email o la contraseña son incorrectos");
+                return View();
+            }
+        }
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -71,6 +112,7 @@ namespace BETL20250324AppWebMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.Password = CalcularHashMD5(user.Password);
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -165,6 +207,21 @@ namespace BETL20250324AppWebMVC.Controllers
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.Id == id);
+        }
+    private string CalcularHashMD5(string input)
+        {
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("x2")); // "x2" convierte el byte en una cadena hexadecimal de dos caracteres.
+                }
+                return sb.ToString();
+            }
         }
     }
 }
