@@ -106,8 +106,8 @@ namespace BETL20250324AppWebMVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "Id", product.BrandId);
-            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "Id", "Id", product.WarehouseId);
+            ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "BrandName", product.BrandId);
+            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "Id", "WarehouseName", product.WarehouseId);
             return View(product);
         }
 
@@ -143,8 +143,8 @@ namespace BETL20250324AppWebMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "Id", product.BrandId);
-            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "Id", "Id", product.WarehouseId);
+            ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "BrandName", product.BrandId);
+            ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "Id", "WarehouseName", product.WarehouseId);
             return View(product);
         }
 
