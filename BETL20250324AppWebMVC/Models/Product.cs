@@ -20,7 +20,7 @@ public partial class Product
     [Range(typeof(decimal), "0.01", "99999999.99", ErrorMessage = "El precio debe estar entre 0.01 y 99999999.99")]
     public decimal Price { get; set; }
 
-    [Display(Name = "Precio compra producto")]
+    [Display(Name = "Precio compra")]
     [Required(ErrorMessage = "El precio es obligatorio.")]
     [Range(typeof(decimal), "0.01", "99999999.99", ErrorMessage = "El precio debe estar entre 0.01 y 99999999.99")]
     public decimal PurchasePrice { get; set; }
