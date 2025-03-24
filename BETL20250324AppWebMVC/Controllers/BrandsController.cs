@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BETL20250324AppWebMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BETL20250324AppWebMVC.Controllers
 {
+    [Authorize]
     public class BrandsController : Controller
     {
         private readonly Test20250324DbContext _context;
