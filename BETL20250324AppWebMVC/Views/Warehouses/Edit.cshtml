@@ -1,12 +1,12 @@
 ﻿@model BETL20250324AppWebMVC.Models.Warehouse
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h4>Warehouse</h4>
+<h4>Almacen</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,26 +14,28 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="WarehouseName" class="control-label"></label>
+                <label asp-for="WarehouseName" class="control-label">Nombre</label>
                 <input asp-for="WarehouseName" class="form-control" />
                 <span asp-validation-for="WarehouseName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Notes" class="control-label"></label>
+                <label asp-for="Notes" class="control-label">Notas</label>
                 <input asp-for="Notes" class="form-control" />
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group mt-2">
+                <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-primary mt-2">Cancelar</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
