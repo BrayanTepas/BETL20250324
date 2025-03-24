@@ -19,9 +19,23 @@ namespace BETL20250324AppWebMVC.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(User usuario, int topRegistro = 10, string Role = "Seleccionar")
         {
-            return View(await _context.Users.ToListAsync());
+            var query = _context.Users.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(usuario.Username))
+                query = query.Where(s => s.Username.Contains(usuario.Username));
+            if (!string.IsNullOrWhiteSpace(usuario.Email))
+                query = query.Where(s => s.Email.Contains(usuario.Email));
+            if (Role != "Seleccionar")
+                query = query.Where(s => s.Role.Contains(usuario.Role));
+            if (!string.IsNullOrWhiteSpace(usuario.Notes))
+                query = query.Where(s => s.Notes.Contains(usuario.Notes));
+
+            if (topRegistro > 0)
+                query = query.Take(topRegistro);
+
+
+            return View(await query.ToListAsync());
         }
 
         // GET: Users/Details/5

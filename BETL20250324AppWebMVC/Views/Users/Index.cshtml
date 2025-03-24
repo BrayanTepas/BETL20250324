@@ -1,15 +1,69 @@
 ﻿@model IEnumerable<BETL20250324AppWebMVC.Models.User>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Inicio";
 }
 
 <h1>Index</h1>
+<h1>Buscar productos</h1>
+<form asp-action="Index">
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label class="control-label">Nombre</label>
+                <input type="text" name="Username" class="form-control" />
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input type="text" name="email" class="form-control" />
+            </div>
+        </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label class="control-label">roles</label>
+                <select name="role" class="form-control">
+                    <option selected value="Seleccionar">Seleccionar</option>
+                    <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                    <option value="GERENTE">GERENTE</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group">
+                    <label class="control-label">Notas</label>
+                    <textarea name="Notes" class="form-control"></textarea>
+                </div>
+            </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label class="control-label">Cant. Registros</label>
+                <select name="topRegistro" class="form-control">
+                    <option selected value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="60">60</option>
+                    <option value="100">100</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                    <option value="0">Todos</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 mb-2">
+        <div class="col-12">
+            <input type="submit" value="Buscar" class="btn btn-primary" />
+            <a class="btn btn-info" asp-action="Create">Ir a crear</a>
+        </div>
+    </div>
+</form>
+
+<table class="table table-success table-striped" id="myTable">
     <thead>
         <tr>
             <th>
@@ -31,29 +85,49 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning text-white">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+             // $('#myTable').DataTable();
+
+            // $('#myTable').DataTable({
+            //      "language": {
+            //     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            //     }
+            // });
+
+             $('#myTable').DataTable({
+               "language":languageTable
+             });
+        });
+    </script>
+}
+
