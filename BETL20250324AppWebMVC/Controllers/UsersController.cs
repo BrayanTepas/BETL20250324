@@ -158,6 +158,7 @@ namespace BETL20250324AppWebMVC.Controllers
             {
                 try
                 {
+                    user.Password = CalcularHashMD5(user.Password);
                     _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
