@@ -24,16 +24,12 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label">Contraseña</label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <label class="control-label">roles</label>
                 <select name="Role" class="form-control">
                     
-                    <option selected value="ADMINISTRADOR">ADMINISTRADOR</option>
+                    <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                     <option value="GERENTE">GERENTE</option>
                 </select>
             </div>

@@ -9,45 +9,51 @@
 
 <h4>usuario</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-4">
             <div class="form-group">
-                <label asp-for="Username" class="control-label">nombre</label>
+                <label asp-for="Username" class="control-label">Nombre</label>
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label">correo</label>
+                <label asp-for="Email" class="control-label">Correo</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+        </div>
+
+        <div class="col-4">
             <div class="form-group">
-                <label asp-for="Password" class="control-label">contraseña</label>
-                <input asp-for="Password" class="form-control" />
+                <label asp-for="Password" class="control-label">Contraseña</label>
+                <input asp-for="Password" type="password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-
-                <label class="control-label">roles</label>
+                <label class="control-label">Roles</label>
                 <select name="Role" class="form-control">
-                    <option selected value="Seleccionar">Seleccionar</option>
+                    <option selected value="">Seleccionar</option>
                     <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                     <option value="GERENTE">GERENTE</option>
                 </select>
             </div>
+        </div>
+        <div class="col-8">
             <div class="form-group">
                 <label asp-for="Notes" class="control-label">Notas</label>
-                <input asp-for="Notes" class="form-control" />
+                <textarea asp-for="Notes" class="form-control"></textarea>
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
-            <div class="form-group mt-2">
-                <input type="submit" value="crear" class="btn btn-success" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+
+    <div class="form-group mt-2">
+        <input type="submit" value="Crear" class="btn btn-success" />
+    </div>
+</form>
 
 <div class="mt-2">
     <a asp-action="Index" class="btn btn-dark">cancelar</a>

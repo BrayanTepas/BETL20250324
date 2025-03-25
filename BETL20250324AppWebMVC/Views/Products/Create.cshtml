@@ -18,9 +18,8 @@
         </div>
         <div class="col-4">
             <div class="form-group">
-                <label class="control-label">Descripción</label>
-                <textarea asp-for="Description" class="form-control"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label class="control-label">Almacen</label>
+                <select asp-for="WarehouseId" class="form-control" asp-items="ViewBag.WarehouseId"></select>
             </div>
         </div>
     </div>
@@ -47,15 +46,17 @@
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
         </div>
+        <div class="col-8">
+            <div class="form-group">
+                <label class="control-label">Descripción</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
     </div>
 
     <div class="row">
-        <div class="col-4">
-            <div class="form-group">
-                <label class="control-label">Almacen</label>
-                <select asp-for="WarehouseId" class="form-control" asp-items="ViewBag.WarehouseId"></select>
-            </div>
-        </div>
+        
         <div class="col-4">
             <div class="form-group">
                 <label class="control-label">Marca</label>

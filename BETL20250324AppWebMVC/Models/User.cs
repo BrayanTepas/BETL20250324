@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BETL20250324AppWebMVC.Models;
 
@@ -29,4 +30,6 @@ public partial class User
 
     [Display(Name = "notas")]
     public string? Notes { get; set; }
+
+    
 }
